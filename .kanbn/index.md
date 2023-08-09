@@ -11,13 +11,14 @@ completedColumns:
 
 ## Todo
 
-- [get-the-game-api](tasks/get-the-game-api.md)
 - [app-ui](tasks/app-ui.md)
 - [home-component](tasks/home-component.md)
 - [skeleton](tasks/skeleton.md)
 - [debug](tasks/debug.md)
 
 ## In Progress
+
+- [get-the-game-api](tasks/get-the-game-api.md)
 
 ## Done
 
