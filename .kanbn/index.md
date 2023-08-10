@@ -18,9 +18,8 @@ completedColumns:
 
 ## In Progress
 
-- [get-the-game-api](tasks/get-the-game-api.md)
-
 ## Done
 
 - [shadcn-for-components](tasks/shadcn-for-components.md)
+- [get-the-game-api](tasks/get-the-game-api.md)
 - [axios](tasks/axios.md)
