@@ -1,4 +1,4 @@
-"use client"
+
 import {BsSearch} from "react-icons/bs"
 
 import { useEffect, useState } from "react";
@@ -12,30 +12,26 @@ type Game = {
 
 const apiKey ="05d65ef601fa4b3faa7a09894e78563c"
 const getGames = async (): Promise<Game[]> => {
-  const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}`);
+  return new Promise<Game[]>((resolve) => {
+    setTimeout(async () => {
+      const response = await fetch(
+        `https://api.rawg.io/api/games?key=${apiKey}`
+      );
 
-  if (!response.ok) {
-    throw new Error("Can't fetch data");
-  }
+      if (!response.ok) {
+        throw new Error("Can't fetch data");
+      }
 
-  const data = await response.json(); // Use await to get the JSON data
-  return data.results; // Return the results array
+      const data = await response.json();
+      resolve(data.results);
+    }, 3000); // Delay of 3 seconds (3000 milliseconds)
+  });
 };
 
-export default function Home() {
-  const [games, setGames] = useState<Game[]>([]); // UseState to manage games state
 
-  useEffect(() => {
-    getGames()
-      .then((data) => {
-        setGames(data);
+export default async function Home() {
+  const games:Game[] = await getGames()
 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []); // Empty dependency array for fetching data once
-console.log(games)
   return (
     <>
       <nav className="py-2 px-3 flex justify-between">
