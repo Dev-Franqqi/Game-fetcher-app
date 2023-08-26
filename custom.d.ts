@@ -4,3 +4,11 @@ declare namespace NodeJS {
   
   }
 }
+
+
+type Game = {
+  id: string;
+  name: string;
+  background_image: string;
+  released: string;
+};

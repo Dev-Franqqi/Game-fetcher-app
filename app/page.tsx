@@ -1,36 +1,17 @@
-
 import {BsSearch} from "react-icons/bs"
-
+import Image from "next/image";
 import { useEffect, useState } from "react";
-
-type Game = {
-  id: string;
-  name: string;
-  background_image: string;
-  released: string
-};
-
-const apiKey ="05d65ef601fa4b3faa7a09894e78563c"
-const getGames = async (): Promise<Game[]> => {
-  return new Promise<Game[]>((resolve) => {
-    setTimeout(async () => {
-      const response = await fetch(
-        `https://api.rawg.io/api/games?key=${apiKey}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Can't fetch data");
-      }
-
-      const data = await response.json();
-      resolve(data.results);
-    }, 3000); // Delay of 3 seconds (3000 milliseconds)
-  });
-};
-
-
+import getGames from  "./lib/getGames"
+import Loading from "./loading";
+import { Suspense } from "react";
 export default async function Home() {
-  const games:Game[] = await getGames()
+
+  const gamesData = getGames();
+  const games = await gamesData;
+
+  
+
+  
 
   return (
     <>
@@ -43,23 +24,26 @@ export default async function Home() {
             type="text"
           />
 
-          <button className="ml-2"><BsSearch /></button>
+          <button className="ml-2">
+            <BsSearch />
+          </button>
         </div>
       </nav>
       <div className="text-white  py-10 bg-gradient-to-r from-black to-purple-800">
-        {games.map((game) => (
-          <div
-            className="border  mb-3 rounded-md p-5 md:w-3/5 mx-auto"
-            key={game.id}
-          >
-            <h1 className="text-2xl mb-2 font-bold">{game.name}</h1>
-            <img
-              src={game.background_image}
-              alt={game.name}
-              className="rounded-md "
-            />
+        {Array.from(games).map((game) => (
+          <div className="border mb-3 rounded-md p-5 md:w-3/5 mx-auto">
+            <h1>{game.name}</h1>
+            <Suspense fallback={<Loading />}>
+              <Image
+                src={game.background_image}
+                width={500}
+                height={200}
+                quality={100}
+                alt="game image"
+              />
+            </Suspense>
 
-            <h3 className="text-sm">Release date: {game.released}</h3>
+            <p>{game.released}</p>
           </div>
         ))}
       </div>
