@@ -9,7 +9,10 @@ export default function Loading() {
       
           <div className="border mb-3 rounded-md p-5 md:w-3/5 mx-auto">
            
-            <Skeleton className="mt-4 w-full h-56" />{" "}
+            <Skeleton className="mt-4 w-full h-56" />
+            <Skeleton className="mt-4 w-full h-56" />
+            <Skeleton className="mt-4 w-full h-56" />
+            <Skeleton className="mt-4 w-full h-56" />
            
             
      

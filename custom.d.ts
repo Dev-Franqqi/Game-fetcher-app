@@ -8,6 +8,7 @@ declare namespace NodeJS {
 
 type Game = {
   id: string;
+  slug: string;
   name: string;
   background_image: string;
   released: string;
